@@ -1,3 +1,5 @@
+//Rachana Kotamraju and Sujit Molleti
+
 package sample;
 
 public class SongDetail {
@@ -16,6 +18,6 @@ public class SongDetail {
 
     public String toString(){
 
-        return "Song: "+artist+", Artist: "+artist+", Album: "+album+", Year: "+year;
+        return song+" by "+artist;
     }
 }
