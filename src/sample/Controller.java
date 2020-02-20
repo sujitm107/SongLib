@@ -102,6 +102,11 @@ public class Controller implements Initializable {
             insertPosition++;
         }
         songsObservableList.add(insertPosition , temp);
+
+        SongTextField.clear();
+        ArtistTextField.clear();
+        AlbumTextField.clear();
+        YearTextField.clear();
     }
 
     @FXML
@@ -117,9 +122,21 @@ public class Controller implements Initializable {
             ArtistLabel.setText("Artist: ");
             AlbumLabel.setText("Album: ");
             YearLabel.setText("Year: ");
+
+            //DISABLING EDIT AND DELETE BUTTON BECAUSE ONCE YOU DELETE THERE IS NO SELECTED ITEM
             DltButton.setDisable(true);
+            EditButton.setDisable(true);
         }
 
+    }
+
+    @FXML
+    private void editButtonClicked(ActionEvent e){
+        SongDetail selectedSong = SongListView.getSelectionModel().getSelectedItem();
+        SongTextField.setText(selectedSong.song);
+        ArtistTextField.setText(selectedSong.artist);
+        AlbumTextField.setText(selectedSong.album);
+        YearTextField.setText(selectedSong.year);
     }
 
     @Override
@@ -152,7 +169,7 @@ public class Controller implements Initializable {
                     AlbumLabel.setText("Album: "+selectedSong.album);
                     YearLabel.setText("Year: "+selectedSong.year);
 
-                    //ABLING THE DELETE BUTTON
+                    //ABLING THE DELETE AND EDIT BUTTONS
                     DltButton.setDisable(false);
                     EditButton.setDisable(false);
                 }

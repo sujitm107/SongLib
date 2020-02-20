@@ -47,7 +47,7 @@
             <ListView fx:id="SongListView" prefHeight="400.0" prefWidth="200.0" />
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="Edit">
+                  <Button fx:id="EditButton" mnemonicParsing="false" onAction="#editButtonClicked" text="Edit">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>
