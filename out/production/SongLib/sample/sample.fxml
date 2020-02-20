@@ -29,10 +29,10 @@
             </StackPane>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label maxWidth="1.7976931348623157E308" text="Song:" />
-                  <Label maxWidth="1.7976931348623157E308" text="Artist:" />
-                  <Label maxWidth="1.7976931348623157E308" text="Album:" />
-                  <Label maxWidth="1.7976931348623157E308" text="Year:" />
+                  <Label fx:id="SongLabel" maxWidth="1.7976931348623157E308" text="Song:" />
+                  <Label fx:id="ArtistLabel" maxWidth="1.7976931348623157E308" text="Artist:" />
+                  <Label fx:id="AlbumLabel" maxWidth="1.7976931348623157E308" text="Album:" />
+                  <Label fx:id="YearLabel" maxWidth="1.7976931348623157E308" text="Year:" />
                </children>
                <VBox.margin>
                   <Insets left="50.0" />
@@ -52,7 +52,7 @@
                         <Insets left="10.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" text="Delete">
+                  <Button fx:id="DltButton" mnemonicParsing="false" onAction="#deleteButtonClicked" text="Delete">
                      <HBox.margin>
                         <Insets left="10.0" />
                      </HBox.margin>

@@ -9,6 +9,7 @@ public class SongDetail {
     String year;
     String song;
 
+
     public SongDetail(String artist, String album, String year, String song){
         this.artist = artist;
         this.album = album;
