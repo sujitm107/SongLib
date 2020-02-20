@@ -13,7 +13,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
 import java.net.URL;
-import java.time.Year;
 import java.util.Collections;
 import java.util.ResourceBundle;
 
@@ -39,6 +38,8 @@ public class Controller implements Initializable {
     private Button DltButton;
     @FXML
     private Button EditButton;
+    @FXML
+    private Button ChangeButton;
 
 //LABELS
     @FXML
@@ -117,11 +118,11 @@ public class Controller implements Initializable {
         alert.showAndWait();
 
         if(alert.getResult() == ButtonType.YES) {
-            songsObservableList.remove(selectedItem);
-            SongLabel.setText("Song: ");
-            ArtistLabel.setText("Artist: ");
-            AlbumLabel.setText("Album: ");
-            YearLabel.setText("Year: ");
+//            songsObservableList.remove(selectedItem);
+//            SongLabel.setText("Song: ");
+//            ArtistLabel.setText("Artist: ");
+//            AlbumLabel.setText("Album: ");
+//            YearLabel.setText("Year: ");
 
             //DISABLING EDIT AND DELETE BUTTON BECAUSE ONCE YOU DELETE THERE IS NO SELECTED ITEM
             DltButton.setDisable(true);
@@ -137,6 +138,8 @@ public class Controller implements Initializable {
         ArtistTextField.setText(selectedSong.artist);
         AlbumTextField.setText(selectedSong.album);
         YearTextField.setText(selectedSong.year);
+
+        ChangeButton.setDisable(false);
     }
 
     @Override
@@ -145,6 +148,7 @@ public class Controller implements Initializable {
         AddButton.setDisable(true);
         DltButton.setDisable(true);
         EditButton.setDisable(true);
+        ChangeButton.setDisable(true);
 
         //ABLING THE ADD BUTTON BECAUSE WE ARE FOCUSING ON THE SONG TEXTFIELD
         SongTextField.focusedProperty().addListener(new ChangeListener<Boolean>() {

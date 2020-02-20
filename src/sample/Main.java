@@ -1,4 +1,4 @@
-//Rachana Kotamraju and Sujit Molleti
+//Rachana K and Sujit M
 
 package sample;
 

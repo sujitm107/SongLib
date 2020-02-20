@@ -14,9 +14,9 @@
             <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
          </BorderPane.margin>
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <VBox prefHeight="150.0" prefWidth="200.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox alignment="BASELINE_CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="SongTextField" promptText="Song" />
                         <TextField fx:id="ArtistTextField" promptText="Artist" />
@@ -24,9 +24,21 @@
                         <TextField fx:id="YearTextField" promptText="Year" />
                      </children>
                   </HBox>
-                  <Button fx:id="AddButton" mnemonicParsing="false" onAction="#addButtonClicked" text="Add" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Button fx:id="AddButton" mnemonicParsing="false" onAction="#addButtonClicked" text="Add">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></Button>
+                        <Button fx:id="ChangeButton" mnemonicParsing="false" text="Change">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
-            </StackPane>
+            </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
                   <Label fx:id="SongLabel" maxWidth="1.7976931348623157E308" text="Song:" />
