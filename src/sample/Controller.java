@@ -64,10 +64,6 @@ public class Controller implements Initializable {
     @FXML
     private void addButtonClicked(ActionEvent e){
 
-        if(editingMode == true){
-            deleteButtonClicked();
-        }
-
         String song = SongTextField.getText().trim();
         String album = AlbumTextField.getText().trim();
         String artist = ArtistTextField.getText().trim();
@@ -84,13 +80,18 @@ public class Controller implements Initializable {
 
     //CHECKING FOR DUPLICATES USING SEQUENTIAL SEARCH
         for( SongDetail i : songsObservableList){
-            if(i.song.equals(temp.song)){
-                if(i.artist.equals(temp.artist)){
+            if(i.song.compareToIgnoreCase(temp.song) == 0){
+                if(i.artist.compareToIgnoreCase(temp.artist) == 0){
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Sorry, this song already exists and cannot be added!", ButtonType.OK);
                     alert.showAndWait();
                     return;
                 }
             }
+        }
+
+        //All our cases have passed, now we can remove the old song, and replace it
+        if(editingMode == true){
+            deleteButtonClicked();
         }
 
 //USING SEQUENTIAL SEARCH TO INSERT ALPHABETICALLY
@@ -108,7 +109,11 @@ public class Controller implements Initializable {
             }
             insertPosition++;
         }
+
+        //ENABLING LISTVIEW
+        SongListView.setDisable(true);
         songsObservableList.add(insertPosition , temp);
+
 
         SongListView.getSelectionModel().select(insertPosition);
         SongDetail selectedSong = SongListView.getSelectionModel().getSelectedItem();
@@ -135,31 +140,41 @@ public class Controller implements Initializable {
         YearTextField.clear();
 
 //Reseting from Editing Mode
-        AddButton.setText("Add");
-        ClearButton.setText("Clear");
-        SongListView.setDisable(false);
-        editingMode = false;
+        if(editingMode == true) {
+            AddButton.setText("Add");
+            ClearButton.setText("Clear");
+            SongListView.setDisable(false);
+            editingMode = false;
+        }
     }
 
     @FXML
     private void deleteButtonClicked(){
         int selectedItem = SongListView.getSelectionModel().getSelectedIndex();
+        ButtonType userChoice = ButtonType.NO;
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want make this change?", ButtonType.CANCEL, ButtonType.YES);
-        alert.showAndWait();
+        if(editingMode == false) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want make this change?", ButtonType.CANCEL, ButtonType.YES);
+            alert.showAndWait();
+            userChoice = alert.getResult();
+        }
 
-        if(alert.getResult() == ButtonType.YES) {
-            songsObservableList.remove(selectedItem);
+        if(userChoice == ButtonType.YES || editingMode == true) {
+            songsObservableList.remove(selectedItem); //this is the only relevant line for editing mode
             if(songsObservableList.size() == 0) {
                 SongLabel.setText("Song: ");
                 ArtistLabel.setText("Artist: ");
                 AlbumLabel.setText("Album: ");
                 YearLabel.setText("Year: ");
+                SongListView.setDisable(true);
 
                 //DISABLING EDIT AND DELETE BUTTON BECAUSE ONCE YOU DELETE THERE IS NO SELECTED ITEM
                 DltButton.setDisable(true);
                 EditButton.setDisable(true);
-            } else {
+            } else { // else statement is for if the size is not empty
+                /*When editing, this code will be run, but it will also be overrided by the select in addButton method
+                    which follows this code
+                 */
                 SongListView.getSelectionModel().select(selectedItem);
 
                 //DISPLAYING NEXT SONG IN LIST
@@ -182,10 +197,23 @@ public class Controller implements Initializable {
         AddButton.setText("Confirm");
         ClearButton.setText("Cancel");
 
+
         SongListView.setDisable(true);
         EditButton.setDisable(true);
         DltButton.setDisable(true);
         editingMode = true;
+
+    }
+
+    @FXML
+    private void selectSongFromListView(){
+        //System.out.println("Selected song from list view");
+        SongDetail selectedSong = SongListView.getSelectionModel().getSelectedItem();
+        displaySongDetails(selectedSong);
+
+        //ABLING THE DELETE AND EDIT BUTTONS
+        DltButton.setDisable(false);
+        EditButton.setDisable(false);
 
     }
 
@@ -196,6 +224,7 @@ public class Controller implements Initializable {
         DltButton.setDisable(true);
         EditButton.setDisable(true);
         ClearButton.setDisable(true);
+        SongListView.setDisable(true);
 
         //ABLING THE ADD BUTTON BECAUSE WE ARE FOCUSING ON THE SONG TEXTFIELD
         SongTextField.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -213,7 +242,6 @@ public class Controller implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
                 if(SongListView.isFocused()){
-
                     //SETTING TEXT
                     SongDetail selectedSong = SongListView.getSelectionModel().getSelectedItem();
                     displaySongDetails(selectedSong);
@@ -224,6 +252,7 @@ public class Controller implements Initializable {
                 }
             }
         });
+
 
 
     }
