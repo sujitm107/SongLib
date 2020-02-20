@@ -51,8 +51,7 @@ public class Controller implements Initializable {
     @FXML
     private Label YearLabel;
 
-    //EditingMode 0 --> off, 1 --> on
-    int EditingMode = 0;
+    boolean editingMode = false;
 
 
 //SONG LIST
@@ -65,13 +64,17 @@ public class Controller implements Initializable {
     @FXML
     private void addButtonClicked(ActionEvent e){
 
-        String song = SongTextField.getText();
-        String album = AlbumTextField.getText();
-        String artist = ArtistTextField.getText();
-        String year = YearTextField.getText();
+        if(editingMode == true){
+            deleteButtonClicked();
+        }
+
+        String song = SongTextField.getText().trim();
+        String album = AlbumTextField.getText().trim();
+        String artist = ArtistTextField.getText().trim();
+        String year = YearTextField.getText().trim();
 
 //CHECKING IF SONG OR ARTIST TEXTFIELDs are EMPTY
-        if(song.trim().length() == 0 || artist.trim().length() == 0){
+        if(song.length() == 0 || artist.length() == 0){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter both a song and an artist name!", ButtonType.OK);
             alert.showAndWait();
             return;
@@ -116,6 +119,12 @@ public class Controller implements Initializable {
         AlbumTextField.clear();
         YearTextField.clear();
         ClearButton.setDisable(true);
+
+//Reseting from Editing Mode
+        AddButton.setText("Add");
+        ClearButton.setText("Clear");
+        SongListView.setDisable(false);
+        editingMode = false;
     }
 
     @FXML
@@ -124,13 +133,19 @@ public class Controller implements Initializable {
         ArtistTextField.clear();
         AlbumTextField.clear();
         YearTextField.clear();
+
+//Reseting from Editing Mode
+        AddButton.setText("Add");
+        ClearButton.setText("Clear");
+        SongListView.setDisable(false);
+        editingMode = false;
     }
 
     @FXML
     private void deleteButtonClicked(){
         int selectedItem = SongListView.getSelectionModel().getSelectedIndex();
 
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this item?", ButtonType.CANCEL, ButtonType.YES);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want make this change?", ButtonType.CANCEL, ButtonType.YES);
         alert.showAndWait();
 
         if(alert.getResult() == ButtonType.YES) {
@@ -163,7 +178,14 @@ public class Controller implements Initializable {
         ArtistTextField.setText(selectedSong.artist);
         AlbumTextField.setText(selectedSong.album);
         YearTextField.setText(selectedSong.year);
-        
+
+        AddButton.setText("Confirm");
+        ClearButton.setText("Cancel");
+
+        SongListView.setDisable(true);
+        EditButton.setDisable(true);
+        DltButton.setDisable(true);
+        editingMode = true;
 
     }
 
