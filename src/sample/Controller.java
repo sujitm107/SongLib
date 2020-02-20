@@ -39,7 +39,7 @@ public class Controller implements Initializable {
     @FXML
     private Button EditButton;
     @FXML
-    private Button ChangeButton;
+    private Button ClearButton;
 
 //LABELS
     @FXML
@@ -50,6 +50,9 @@ public class Controller implements Initializable {
     private Label AlbumLabel;
     @FXML
     private Label YearLabel;
+
+    //EditingMode 0 --> off, 1 --> on
+    int EditingMode = 0;
 
 
 //SONG LIST
@@ -104,6 +107,19 @@ public class Controller implements Initializable {
         }
         songsObservableList.add(insertPosition , temp);
 
+        SongListView.getSelectionModel().select(insertPosition);
+        SongDetail selectedSong = SongListView.getSelectionModel().getSelectedItem();
+        displaySongDetails(selectedSong);
+
+        SongTextField.clear();
+        ArtistTextField.clear();
+        AlbumTextField.clear();
+        YearTextField.clear();
+        ClearButton.setDisable(true);
+    }
+
+    @FXML
+    private void clearButtonClicked(ActionEvent e){
         SongTextField.clear();
         ArtistTextField.clear();
         AlbumTextField.clear();
@@ -111,22 +127,31 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void deleteButtonClicked(ActionEvent e){
+    private void deleteButtonClicked(){
         int selectedItem = SongListView.getSelectionModel().getSelectedIndex();
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this item?", ButtonType.CANCEL, ButtonType.YES);
         alert.showAndWait();
 
         if(alert.getResult() == ButtonType.YES) {
-//            songsObservableList.remove(selectedItem);
-//            SongLabel.setText("Song: ");
-//            ArtistLabel.setText("Artist: ");
-//            AlbumLabel.setText("Album: ");
-//            YearLabel.setText("Year: ");
+            songsObservableList.remove(selectedItem);
+            if(songsObservableList.size() == 0) {
+                SongLabel.setText("Song: ");
+                ArtistLabel.setText("Artist: ");
+                AlbumLabel.setText("Album: ");
+                YearLabel.setText("Year: ");
 
-            //DISABLING EDIT AND DELETE BUTTON BECAUSE ONCE YOU DELETE THERE IS NO SELECTED ITEM
-            DltButton.setDisable(true);
-            EditButton.setDisable(true);
+                //DISABLING EDIT AND DELETE BUTTON BECAUSE ONCE YOU DELETE THERE IS NO SELECTED ITEM
+                DltButton.setDisable(true);
+                EditButton.setDisable(true);
+            } else {
+                SongListView.getSelectionModel().select(selectedItem);
+
+                //DISPLAYING NEXT SONG IN LIST
+                SongDetail selectedSong = SongListView.getSelectionModel().getSelectedItem();
+                displaySongDetails(selectedSong);
+            }
+
         }
 
     }
@@ -138,8 +163,8 @@ public class Controller implements Initializable {
         ArtistTextField.setText(selectedSong.artist);
         AlbumTextField.setText(selectedSong.album);
         YearTextField.setText(selectedSong.year);
+        
 
-        ChangeButton.setDisable(false);
     }
 
     @Override
@@ -148,7 +173,7 @@ public class Controller implements Initializable {
         AddButton.setDisable(true);
         DltButton.setDisable(true);
         EditButton.setDisable(true);
-        ChangeButton.setDisable(true);
+        ClearButton.setDisable(true);
 
         //ABLING THE ADD BUTTON BECAUSE WE ARE FOCUSING ON THE SONG TEXTFIELD
         SongTextField.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -156,6 +181,7 @@ public class Controller implements Initializable {
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean oldValue, Boolean newValue) {
                 if(SongTextField.isFocused()){
                     AddButton.setDisable(false);
+                    ClearButton.setDisable(false);
                 }
             }
         });
@@ -168,10 +194,7 @@ public class Controller implements Initializable {
 
                     //SETTING TEXT
                     SongDetail selectedSong = SongListView.getSelectionModel().getSelectedItem();
-                    SongLabel.setText("Song: "+selectedSong.song);
-                    ArtistLabel.setText("Artist: "+selectedSong.artist);
-                    AlbumLabel.setText("Album: "+selectedSong.album);
-                    YearLabel.setText("Year: "+selectedSong.year);
+                    displaySongDetails(selectedSong);
 
                     //ABLING THE DELETE AND EDIT BUTTONS
                     DltButton.setDisable(false);
@@ -180,6 +203,14 @@ public class Controller implements Initializable {
             }
         });
 
+
+    }
+
+    public void displaySongDetails(SongDetail selectedSong){
+        SongLabel.setText("Song: "+selectedSong.song);
+        ArtistLabel.setText("Artist: "+selectedSong.artist);
+        AlbumLabel.setText("Album: "+selectedSong.album);
+        YearLabel.setText("Year: "+selectedSong.year);
 
     }
 }
