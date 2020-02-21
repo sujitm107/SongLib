@@ -69,6 +69,20 @@ public class Controller implements Initializable {
         String artist = ArtistTextField.getText().trim();
         String year = YearTextField.getText().trim();
 
+        try{
+            int x = Integer.parseInt(year);
+            if(x < 0){
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid year!", ButtonType.OK);
+                alert.showAndWait();
+                return;
+            }
+
+        } catch(NumberFormatException error){
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid year!", ButtonType.OK);
+            alert.showAndWait();
+            return;
+        }
+
 //CHECKING IF SONG OR ARTIST TEXTFIELDs are EMPTY
         if(song.length() == 0 || artist.length() == 0){
             Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter both a song and an artist name!", ButtonType.OK);

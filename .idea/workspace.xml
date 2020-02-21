@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/SongLib/sample/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/SongLib.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -120,7 +125,7 @@
       <Port>5050</Port>
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="sample.Main" />
+      <option name="MAIN_CLASS_NAME" value="sample.SongLib" />
       <module name="SongLib" />
       <option name="VM_PARAMETERS" value="--module-path $USER_HOME$/Downloads/javafx-sdk-13.0.2/lib --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
@@ -207,7 +212,7 @@
       <workItem from="1582073731992" duration="509000" />
       <workItem from="1582074247734" duration="10936000" />
       <workItem from="1582135620653" duration="19444000" />
-      <workItem from="1582220988998" duration="6970000" />
+      <workItem from="1582220988998" duration="9618000" />
     </task>
     <servers />
   </component>
@@ -231,29 +236,33 @@
       <screen x="0" y="0" width="1680" height="1050" />
     </state>
     <state x="653" y="237" key="#com.intellij.ide.util.MemberChooser/0.0.1680.1050@0.0.1680.1050" timestamp="1582086524285" />
-    <state width="1330" height="191" key="GridCell.Tab.0.bottom" timestamp="1582233926433">
-      <screen x="0" y="23" width="2560" height="982" />
+    <state width="1330" height="191" key="GridCell.Tab.0.bottom" timestamp="1582262849252">
+      <screen x="0" y="23" width="1680" height="954" />
     </state>
     <state width="1638" height="294" key="GridCell.Tab.0.bottom/0.0.1680.1050@0.0.1680.1050" timestamp="1582214486568" />
-    <state width="1638" height="294" key="GridCell.Tab.0.bottom/0.23.1680.952@0.23.1680.952" timestamp="1582171530431" />
+    <state width="1330" height="191" key="GridCell.Tab.0.bottom/0.23.1680.952@0.23.1680.952" timestamp="1582243197021" />
+    <state width="1330" height="191" key="GridCell.Tab.0.bottom/0.23.1680.954@0.23.1680.954" timestamp="1582262849252" />
     <state width="1330" height="191" key="GridCell.Tab.0.bottom/0.23.2560.982@0.23.2560.982" timestamp="1582233926433" />
-    <state width="1330" height="191" key="GridCell.Tab.0.center" timestamp="1582233926432">
-      <screen x="0" y="23" width="2560" height="982" />
+    <state width="1330" height="191" key="GridCell.Tab.0.center" timestamp="1582262849251">
+      <screen x="0" y="23" width="1680" height="954" />
     </state>
     <state width="1638" height="294" key="GridCell.Tab.0.center/0.0.1680.1050@0.0.1680.1050" timestamp="1582214486566" />
-    <state width="1638" height="294" key="GridCell.Tab.0.center/0.23.1680.952@0.23.1680.952" timestamp="1582171530430" />
+    <state width="1330" height="191" key="GridCell.Tab.0.center/0.23.1680.952@0.23.1680.952" timestamp="1582243197020" />
+    <state width="1330" height="191" key="GridCell.Tab.0.center/0.23.1680.954@0.23.1680.954" timestamp="1582262849251" />
     <state width="1330" height="191" key="GridCell.Tab.0.center/0.23.2560.982@0.23.2560.982" timestamp="1582233926432" />
-    <state width="1330" height="191" key="GridCell.Tab.0.left" timestamp="1582233926431">
-      <screen x="0" y="23" width="2560" height="982" />
+    <state width="1330" height="191" key="GridCell.Tab.0.left" timestamp="1582262849250">
+      <screen x="0" y="23" width="1680" height="954" />
     </state>
     <state width="1638" height="294" key="GridCell.Tab.0.left/0.0.1680.1050@0.0.1680.1050" timestamp="1582214486566" />
-    <state width="1638" height="294" key="GridCell.Tab.0.left/0.23.1680.952@0.23.1680.952" timestamp="1582171530429" />
+    <state width="1330" height="191" key="GridCell.Tab.0.left/0.23.1680.952@0.23.1680.952" timestamp="1582243197019" />
+    <state width="1330" height="191" key="GridCell.Tab.0.left/0.23.1680.954@0.23.1680.954" timestamp="1582262849250" />
     <state width="1330" height="191" key="GridCell.Tab.0.left/0.23.2560.982@0.23.2560.982" timestamp="1582233926431" />
-    <state width="1330" height="191" key="GridCell.Tab.0.right" timestamp="1582233926432">
-      <screen x="0" y="23" width="2560" height="982" />
+    <state width="1330" height="191" key="GridCell.Tab.0.right" timestamp="1582262849251">
+      <screen x="0" y="23" width="1680" height="954" />
     </state>
     <state width="1638" height="294" key="GridCell.Tab.0.right/0.0.1680.1050@0.0.1680.1050" timestamp="1582214486567" />
-    <state width="1638" height="294" key="GridCell.Tab.0.right/0.23.1680.952@0.23.1680.952" timestamp="1582171530430" />
+    <state width="1330" height="191" key="GridCell.Tab.0.right/0.23.1680.952@0.23.1680.952" timestamp="1582243197020" />
+    <state width="1330" height="191" key="GridCell.Tab.0.right/0.23.1680.954@0.23.1680.954" timestamp="1582262849251" />
     <state width="1330" height="191" key="GridCell.Tab.0.right/0.23.2560.982@0.23.2560.982" timestamp="1582233926432" />
     <state x="0" y="63" key="SettingsEditor" timestamp="1582073805539">
       <screen x="0" y="0" width="1680" height="1050" />
