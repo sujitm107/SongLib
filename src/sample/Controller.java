@@ -303,7 +303,7 @@ public class Controller implements Initializable {
                 SongDetail prevSong;
                 //inside the file looping
                 //components = i.returnStringID().split(",");
-                components = scan.nextLine().split(",");
+                components = scan.nextLine().split(",&");
                 prevSong = new SongDetail(components[1], components[2], components[3], components[0]);
                 songsObservableList.add(prevSong);
                 SongListView.setDisable(false);

@@ -26,7 +26,7 @@ public class SongDetail {
             year = " ";
         }
 
-        return song+","+artist+","+album+","+year+",";
+        return song+",&"+artist+",&"+album+",&"+year+",&";
     }
 
     public String toString(){
