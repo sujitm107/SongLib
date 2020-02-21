@@ -12,9 +12,14 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import static javafx.collections.FXCollections.observableArrayList;
 
@@ -40,6 +45,8 @@ public class Controller implements Initializable {
     private Button EditButton;
     @FXML
     private Button ClearButton;
+    @FXML
+    private Button CloseButton;
 
 //LABELS
     @FXML
@@ -56,31 +63,32 @@ public class Controller implements Initializable {
 
 //SONG LIST
     @FXML
-    private ListView<SongDetail> SongListView;
+    public ListView<SongDetail> SongListView;
 
     final ObservableList<String> songNamesList = observableArrayList();
-    final ObservableList<SongDetail> songsObservableList = observableArrayList();
+    final public ObservableList<SongDetail> songsObservableList = observableArrayList();
 
     @FXML
-    private void addButtonClicked(ActionEvent e){
-
+    public void addButtonClicked(ActionEvent e){
         String song = SongTextField.getText().trim();
         String album = AlbumTextField.getText().trim();
         String artist = ArtistTextField.getText().trim();
         String year = YearTextField.getText().trim();
 
-        try{
-            int x = Integer.parseInt(year);
-            if(x < 0){
+        if(year.length() != 0) { //if a year is inputted
+            try {
+                int x = Integer.parseInt(year);
+                if (x < 0) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid year!", ButtonType.OK);
+                    alert.showAndWait();
+                    return;
+                }
+
+            } catch (NumberFormatException error) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid year!", ButtonType.OK);
                 alert.showAndWait();
                 return;
             }
-
-        } catch(NumberFormatException error){
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Please enter a valid year!", ButtonType.OK);
-            alert.showAndWait();
-            return;
         }
 
 //CHECKING IF SONG OR ARTIST TEXTFIELDs are EMPTY
@@ -152,6 +160,7 @@ public class Controller implements Initializable {
         ArtistTextField.clear();
         AlbumTextField.clear();
         YearTextField.clear();
+
 
 //Reseting from Editing Mode
         if(editingMode == true) {
@@ -233,12 +242,17 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        SongListView.setItems(songsObservableList);
         AddButton.setDisable(true);
         DltButton.setDisable(true);
         EditButton.setDisable(true);
         ClearButton.setDisable(true);
         SongListView.setDisable(true);
+
+        readd();
+        SongListView.setItems(songsObservableList);
+        //read file and add contents
+        //readd contents
+        //clear contents
 
         //ABLING THE ADD BUTTON BECAUSE WE ARE FOCUSING ON THE SONG TEXTFIELD
         SongTextField.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -267,6 +281,36 @@ public class Controller implements Initializable {
             }
         });
 
+
+
+    }
+
+    private void readd() {
+        //System.out.println("Readding methods from file");
+        try {
+            //String fileLine;
+            Scanner scan = new Scanner(new File("savedSongs.txt"));
+            while(scan.hasNext()){
+                System.out.println(scan.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            return;
+        }
+        /*String nextSong = scan.nextLine();
+        System.out.println("This what we read: " + nextSong);
+
+        BufferedReader reader;
+        try{
+            reader = new BufferedReader(new FileReader("savedSongs.txt"));
+            String line = reader.readLine();
+            while(line!=null){
+                System.out.println(line);
+                line = reader.readLine();
+            }
+            reader.close();
+        }catch(Exception e){
+            System.out.println("error");
+        }*/
 
 
     }

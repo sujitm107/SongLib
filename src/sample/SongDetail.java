@@ -17,8 +17,19 @@ public class SongDetail {
         this.song = song;
     }
 
-    public String toString(){
+    public String returnStringID(){
 
+        if(album.length() == 0){
+            album = " ";
+        }
+        if(year.length() == 0){
+            year = " ";
+        }
+
+        return song+","+artist+","+album+","+year+",";
+    }
+
+    public String toString(){
         return song+" by "+artist;
     }
 }
