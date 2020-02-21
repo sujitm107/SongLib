@@ -101,12 +101,14 @@ public class Controller implements Initializable {
         SongDetail temp = new SongDetail(artist, album, year, song);
 
     //CHECKING FOR DUPLICATES USING SEQUENTIAL SEARCH
-        for( SongDetail i : songsObservableList){
-            if(i.song.compareToIgnoreCase(temp.song) == 0){
-                if(i.artist.compareToIgnoreCase(temp.artist) == 0){
-                    Alert alert = new Alert(Alert.AlertType.ERROR, "Sorry, this song already exists and cannot be added!", ButtonType.OK);
-                    alert.showAndWait();
-                    return;
+        if(editingMode == false) {
+            for (SongDetail i : songsObservableList) {
+                if (i.song.compareToIgnoreCase(temp.song) == 0) {
+                    if (i.artist.compareToIgnoreCase(temp.artist) == 0) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR, "Sorry, this song already exists and cannot be added!", ButtonType.OK);
+                        alert.showAndWait();
+                        return;
+                    }
                 }
             }
         }
@@ -250,6 +252,10 @@ public class Controller implements Initializable {
 
         readd();
         SongListView.setItems(songsObservableList);
+        if(!songsObservableList.isEmpty()) { //run if only the list is populated
+            displaySongDetails(songsObservableList.get(0));
+            SongListView.getSelectionModel().select(0);
+        }
         //read file and add contents
         //readd contents
         //clear contents
@@ -289,28 +295,29 @@ public class Controller implements Initializable {
         //System.out.println("Readding methods from file");
         try {
             //String fileLine;
+            String[] components;
             Scanner scan = new Scanner(new File("savedSongs.txt"));
             while(scan.hasNext()){
-                System.out.println(scan.nextLine());
+               // System.out.println(scan.nextLine());
+                //adding songs to observable list;
+                SongDetail prevSong;
+                //inside the file looping
+                //components = i.returnStringID().split(",");
+                components = scan.nextLine().split(",");
+                prevSong = new SongDetail(components[1], components[2], components[3], components[0]);
+                songsObservableList.add(prevSong);
+                SongListView.setDisable(false);
+
+//            System.out.println(components.length);
+//            for( String s : components){
+//                System.out.print(s+" ");
+//            }
+//            System.out.println();
+
             }
         } catch (FileNotFoundException e) {
             return;
         }
-        /*String nextSong = scan.nextLine();
-        System.out.println("This what we read: " + nextSong);
-
-        BufferedReader reader;
-        try{
-            reader = new BufferedReader(new FileReader("savedSongs.txt"));
-            String line = reader.readLine();
-            while(line!=null){
-                System.out.println(line);
-                line = reader.readLine();
-            }
-            reader.close();
-        }catch(Exception e){
-            System.out.println("error");
-        }*/
 
 
     }
